@@ -1,0 +1,62 @@
+{
+  "name": "pf1-pdf-en-import",
+  "title": "Deidril's Pathfinder 1 PDF Import",
+  "description": "Allow to import Pathfinder 1st PDFs from Paizo into foundry",
+  "authors": [ 
+    {
+      "name": "Deidril",
+      "discord": "Deidril#2009",
+      "url": "https://github.com/deidril",
+      "email": "fmanisse@gmail.com",
+      "patreon": "https://www.patreon.com/deidril",
+      "flags": {}
+    }
+  ],
+  "version": "1.00",
+  "compatibility": {
+    "minimum": "10.276",
+    "verified": "10.291",
+    "maximum": "10"
+  },
+  "styles": [
+    "css/common/dialogs.css", "css/common/helyx-conversions.css", "css/common/helyx-sections.css", 
+    "css/common/helyx-sections.css", "css/common/helyx.css", "css/common/summary.css",
+     
+    "css/pf1/blocks.css", "css/pf1/statblock.css"
+  ],
+  "system": [
+    "pf1"
+  ],
+  "relationships": {
+    "systems":
+    [
+      { "id": "pf1", "type": "system", "compatibility": { "minimum": "0.82.5", "verified": "0.82.5" } }
+    ],
+    "requires": 
+    [
+
+      { "id": "pf1-bestiary", "type": "module", "compatibility": { "minimum": "0.1.5", "verified": "0.1.5" } },
+      { "id": "pf1", "type": "system", "compatibility": { "minimum": "0.82.5", "verified": "0.82.5" } }
+    ]
+  },
+  "scripts": [
+  ],
+  "esmodules": [
+    "src/helyx.bundle.js"
+  ],
+  "languages": [
+    {
+        "lang": "fr",
+        "name": "Français",
+        "path": "lang/fr.json"
+    },
+    {
+        "lang": "en",
+        "name": "English",
+        "path": "lang/en.json"
+    }
+  ],
+  "issues": "https://github.com/deidril/pf1-pdf-en-import/issues",
+  "manifest": "https://github.com/deidril/pf1-pdf-en-import/releases/latest/download/module.json",
+  "download": "https://github.com/deidril/pf1-pdf-en-import/releases/download/1.00/pf1-pdf-en-import-1.00.zip"
+}
