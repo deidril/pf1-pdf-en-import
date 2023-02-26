@@ -44,6 +44,36 @@
   "esmodules": [
     "src/helyx.bundle.js"
   ],
+  "packs": 
+  [
+    {
+      "type": "Actor",
+      "label": "Crypt of the Everflame",
+      "name": "deid-crypt-of-the-everflame-actors",
+      "system": "pf1",
+      "path": "packs/crypt-of-the-everflame/actors.db",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "type": "Item",
+      "label": "Crypt of the Everflame",
+      "name": "deid-crypt-of-the-everflame-items",
+      "system": "pf1",
+      "path": "packs/crypt-of-the-everflame/items.db",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "type": "Scene",
+      "label": "Crypt of the Everflame",
+      "name": "deid-crypt-of-the-everflame-scenes",
+      "system": "pf1",
+      "path": "packs/crypt-of-the-everflame/scenes.db",
+      "private": false,
+      "flags": {}
+    }
+  ],
   "languages": [
     {
         "lang": "fr",
