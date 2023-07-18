@@ -1,7 +1,7 @@
 {
-  "name": "pf1-pdf-en-import",
+  "id": "pf1-pdf-en-import",
   "title": "Deidril's Pathfinder 1 PDF Import",
-  "description": "Allow to import Pathfinder 1st PDFs from Paizo into foundry",
+  "description": "Allow to import 'Crypt of the Everflame' Paizo's pdf contents, for Pathfinder 1st, into foundry",
   "authors": [ 
     {
       "name": "Deidril",
@@ -12,17 +12,16 @@
       "flags": {}
     }
   ],
-  "version": "1.00",
-  "compatibility": {
-    "minimum": "10.276",
-    "verified": "10.291",
-    "maximum": "10"
-  },
+  "version": "2.01",
+  "compatibility": { "minimum": "11", "verified": "11", "maximum": "11" },
   "styles": [
-    "css/common/dialogs.css", "css/common/helyx-conversions.css", "css/common/helyx-sections.css", 
-    "css/common/helyx-sections.css", "css/common/helyx.css", "css/common/summary.css",
-     
-    "css/pf1/blocks.css", "css/pf1/statblock.css"
+    "css/pf1/statblock.css", "css/pf1/blocks.css",
+
+    "css/pdfs/adventures.css",
+
+    "css/helyx/helyx.css", "css/helyx/helyx-conversions.css", "css/helyx/helyx-sections.css",
+    
+    "css/common/dialogs.css", "css/common/summary.css"
   ],
   "system": [
     "pf1"
@@ -32,11 +31,9 @@
     [
       { "id": "pf1", "type": "system", "compatibility": { "minimum": "0.82.5", "verified": "0.82.5" } }
     ],
-    "requires": 
+    "modules":
     [
-
-      { "id": "pf1-bestiary", "type": "module", "compatibility": { "minimum": "0.1.5", "verified": "0.1.5" } },
-      { "id": "pf1", "type": "system", "compatibility": { "minimum": "0.82.5", "verified": "0.82.5" } }
+      { "id": "pf1-bestiary", "type": "module", "compatibility": { "minimum": "0.1.5", "verified": "0.1.5" } }
     ]
   },
   "scripts": [
@@ -46,34 +43,42 @@
   ],
   "packs": 
   [
-    {
-      "type": "Actor",
-      "label": "Crypt of the Everflame",
-      "name": "deid-crypt-of-the-everflame-actors",
-      "system": "pf1",
-      "path": "packs/crypt-of-the-everflame/actors.db",
-      "private": false,
+    { 
+      "name": "deid-crypt-of-the-everflame-actors", "label": "Crypt of the Everflame - Actors", "system": "pf1", 
+      "path": "packs/crypt-of-the-everflame/actors", "type": "Actor",  
+      "ownership": { "PLAYER": "NONE","TRUSTED": "NONE","ASSISTANT": "NONE","GAMEMASTER": "OWNER" }, 
       "flags": {}
-    },
-    {
-      "type": "Item",
-      "label": "Crypt of the Everflame",
-      "name": "deid-crypt-of-the-everflame-items",
-      "system": "pf1",
-      "path": "packs/crypt-of-the-everflame/items.db",
-      "private": false,
+    } ,
+    { 
+      "name": "deid-crypt-of-the-everflame-items", "label": "Crypt of the Everflame - Items", "system": "pf1", 
+      "path": "packs/crypt-of-the-everflame/items", "type": "Item", 
+      "ownership": { "PLAYER": "NONE","TRUSTED": "NONE","ASSISTANT": "NONE","GAMEMASTER": "OWNER" }, 
       "flags": {}
-    },
-    {
-      "type": "Scene",
-      "label": "Crypt of the Everflame",
-      "name": "deid-crypt-of-the-everflame-scenes",
-      "system": "pf1",
-      "path": "packs/crypt-of-the-everflame/scenes.db",
-      "private": false,
+    } ,
+    { 
+      "name": "deid-crypt-of-the-everflame-scenes", "label": "Crypt of the Everflame - Scenes", "system": "pf1", 
+      "path": "packs/crypt-of-the-everflame/scenes", "type": "Scene",
+      "ownership": { "PLAYER": "NONE","TRUSTED": "NONE","ASSISTANT": "NONE","GAMEMASTER": "OWNER" }, 
       "flags": {}
     }
   ],
+  "packFolders": 
+  [{
+      "name": "Deidril Imports",
+      "sorting": "m",
+      "packs": [ ],
+      "folders": 
+      [{
+        "name": "Crypt of the Everflame",
+        "sorting": "m",
+        "packs": 
+        [
+          "deid-crypt-of-the-everflame-actors",
+          "deid-crypt-of-the-everflame-items",
+          "deid-crypt-of-the-everflame-scenes"
+        ]
+      }]
+  }],
   "languages": [
     {
         "lang": "fr",
@@ -88,5 +93,5 @@
   ],
   "issues": "https://github.com/deidril/pf1-pdf-en-import/issues",
   "manifest": "https://github.com/deidril/pf1-pdf-en-import/releases/latest/download/module.json",
-  "download": "https://github.com/deidril/pf1-pdf-en-import/releases/download/1.00/pf1-pdf-en-import-1.00.zip"
+  "download": "https://github.com/deidril/pf1-pdf-en-import/releases/download/2.01/pf1-pdf-en-import-2.01.zip"
 }
