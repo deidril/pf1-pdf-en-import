@@ -15,7 +15,7 @@
   "version": "2.01",
   "compatibility": { "minimum": "11", "verified": "11", "maximum": "11" },
   "styles": [
-    "css/pf1/statblock.css", "css/pf1/blocks.css",
+    "css/pf1/statblock.css", "css/pf1/blocks.css", "css/pf1/system.css",
 
     "css/pdfs/adventures.css",
 
