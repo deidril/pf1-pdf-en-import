@@ -1,0 +1,24 @@
+.window-content .journal-entry-content header.helyx-peda-page-title
+{
+    padding: 8px;
+    margin-bottom: 25px;
+    position: relative;     
+    background-color: rgb(94,0,0);
+
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    color: var(--primary);    
+    font-family: "Vollkorn";
+    font-variant: small-caps;
+    font-weight: 600;
+    font-size: 14px;
+    
+}
+
+.window-content .journal-entry-content header.helyx-peda-page-title h1
+{
+    color: white;
+}
