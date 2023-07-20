@@ -1,23 +1,8 @@
-2023/07/19-17:39:20.052 cfd8 Recovering log #23
-2023/07/19-17:39:20.054 cfd8 Level-0 table #25: started
-2023/07/19-17:39:20.072 cfd8 Level-0 table #25: 46374 bytes OK
-2023/07/19-17:39:20.082 cfd8 Delete type=0 #23
-2023/07/19-17:39:20.083 cfd8 Delete type=3 #22
-2023/07/19-17:40:49.584 c62c Level-0 table #28: started
-2023/07/19-17:40:49.584 c62c Level-0 table #28: 0 bytes OK
-2023/07/19-17:40:49.587 c62c Delete type=0 #26
-2023/07/19-17:40:49.603 c62c Manual compaction at level-0 from '!actors!37nWZRk0xGNDCRWC' @ 72057594037927935 : 1 .. '!actors.items!ly5Z0gk9OmCSg0jy.xDW9SI2maKcVlcsB' @ 0 : 0; will stop at '!actors.items!hFoHDwSjYl1x2jG0.g3gX00gTvJU478ju' @ 72 : 1
-2023/07/19-17:40:49.603 c62c Compacting 1@0 + 0@1 files
-2023/07/19-17:40:49.620 c62c Generated table #29@0: 19 keys, 41033 bytes
-2023/07/19-17:40:49.620 c62c Compacted 1@0 + 0@1 files => 41033 bytes
-2023/07/19-17:40:49.625 c62c compacted to: files[ 0 1 1 0 0 0 0 ]
-2023/07/19-17:40:49.627 c62c Delete type=2 #25
-2023/07/19-17:40:49.630 c62c Manual compaction at level-0 from '!actors.items!hFoHDwSjYl1x2jG0.g3gX00gTvJU478ju' @ 72 : 1 .. '!actors.items!ly5Z0gk9OmCSg0jy.xDW9SI2maKcVlcsB' @ 0 : 0; will stop at (end)
-2023/07/19-17:40:49.632 c62c Manual compaction at level-1 from '!actors!37nWZRk0xGNDCRWC' @ 72057594037927935 : 1 .. '!actors.items!ly5Z0gk9OmCSg0jy.xDW9SI2maKcVlcsB' @ 0 : 0; will stop at '!actors.items!hFoHDwSjYl1x2jG0.g3gX00gTvJU478ju' @ 72 : 1
-2023/07/19-17:40:49.632 c62c Compacting 1@1 + 1@2 files
-2023/07/19-17:40:49.654 c62c Generated table #30@1: 61 keys, 100490 bytes
-2023/07/19-17:40:49.654 c62c Compacted 1@1 + 1@2 files => 100490 bytes
-2023/07/19-17:40:49.657 c62c compacted to: files[ 0 0 1 0 0 0 0 ]
-2023/07/19-17:40:49.658 c62c Delete type=2 #5
-2023/07/19-17:40:49.662 c62c Delete type=2 #29
-2023/07/19-17:40:49.686 c62c Manual compaction at level-1 from '!actors.items!hFoHDwSjYl1x2jG0.g3gX00gTvJU478ju' @ 72 : 1 .. '!actors.items!ly5Z0gk9OmCSg0jy.xDW9SI2maKcVlcsB' @ 0 : 0; will stop at (end)
+2023/07/19-17:47:05.387 a580 Recovering log #27
+2023/07/19-17:47:05.402 a580 Delete type=0 #27
+2023/07/19-17:47:05.403 a580 Delete type=3 #24
+2023/07/19-17:51:04.409 c62c Level-0 table #34: started
+2023/07/19-17:51:04.409 c62c Level-0 table #34: 0 bytes OK
+2023/07/19-17:51:04.422 c62c Delete type=0 #32
+2023/07/19-17:51:04.425 c62c Manual compaction at level-0 from '!actors!37nWZRk0xGNDCRWC' @ 72057594037927935 : 1 .. '!actors.items!ly5Z0gk9OmCSg0jy.xDW9SI2maKcVlcsB' @ 0 : 0; will stop at (end)
+2023/07/19-17:51:04.427 c62c Manual compaction at level-1 from '!actors!37nWZRk0xGNDCRWC' @ 72057594037927935 : 1 .. '!actors.items!ly5Z0gk9OmCSg0jy.xDW9SI2maKcVlcsB' @ 0 : 0; will stop at (end)

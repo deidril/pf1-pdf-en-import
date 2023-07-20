@@ -23,9 +23,7 @@
     
     "css/common/dialogs.css", "css/common/summary.css"
   ],
-  "system": [
-    "pf1"
-  ],
+  "system": [ "pf1" ],
   "relationships": {
     "systems":
     [
