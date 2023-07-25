@@ -12,7 +12,7 @@
       "flags": {}
     }
   ],
-  "version": "2.01",
+  "version": "2.02",
   "compatibility": { "minimum": "11", "verified": "11", "maximum": "11" },
   "styles": [
     "css/pf1/statblock.css", "css/pf1/blocks.css", "css/pf1/system.css",
@@ -91,5 +91,5 @@
   ],
   "issues": "https://github.com/deidril/pf1-pdf-en-import/issues",
   "manifest": "https://github.com/deidril/pf1-pdf-en-import/releases/latest/download/module.json",
-  "download": "https://github.com/deidril/pf1-pdf-en-import/releases/download/2.01/pf1-pdf-en-import-2.01.zip"
+  "download": "https://github.com/deidril/pf1-pdf-en-import/releases/download/2.02/pf1-pdf-en-import-2.02.zip"
 }

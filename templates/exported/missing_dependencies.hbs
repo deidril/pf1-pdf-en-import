@@ -1,0 +1,31 @@
+<form class="flexrow">    
+<section class="helyx-summary-content">
+    <h1 class="helyx-summary-title">{{title}}</h1>
+
+    <div>
+        <div style="width: 600px; height: 300px; border-radius: 5px; border: 1px solid;
+            background-image: url('{{cover.filename}}'); 
+            background-repeat: no-repeat; 
+            background-position-x: {{cover.css_x}}; 
+            background-position-y: {{cover.css_y}};
+            background-size: {{cover.css_size}};
+            margin-left: auto;
+            margin-right: auto;" />
+        </div>      
+    </div>
+
+    <section class="helyx-summary-overview">
+        <h2>Missing dependencies</h2>
+        <div class="helyx-summary-summary">The PDF has been identified but this world is missing the following modules :</div>
+        <ul>
+         {{#each missing_dependencies}}
+        <li><b>{{ this.name }}</b></li>
+        </ul>
+
+        <p>Please, install and activate these modules, then retry to import this pdf.</p>
+    {{/each}}
+    </section>
+
+</section>
+</form>
+
