@@ -1,6 +1,18 @@
 # Deidril's Pathfinder 1 PDF Import
 This foundry vtt plugin allows to import PDFs into the current world. 
 
+# Last release : Deidril's Pathfinder 1 PDF Import v3.04
+
+For Foundry V11 only. It has not been tested on Foundry V12.
+
+This is a migration of the import datas to the new import engine used since a few months for the Starfinder import module.
+
+There are no game breaking changes and you don't need to reimport Crypt of the Everflame. 
+Some things has been fixed here and there. The resulting journals should have a little better look, but that's all.
+
+Changes are mainly internal and hidden to support incoming features or starfinder related stuff, but it was
+necessary to do this migration to use the incoming foundry v12 compatible version. 
+
 # Licenses
 helyx.bundle.js code is under the MIT license
 pdf.worker.min.js code is under the apache license

@@ -2,90 +2,117 @@
   "id": "pf1-pdf-en-import",
   "title": "Deidril's Pathfinder 1 PDF Import",
   "description": "Allow to import 'Crypt of the Everflame' Paizo's pdf contents, for Pathfinder 1st, into foundry",
-  "authors": [ 
+  "authors": [
     {
       "name": "Deidril",
       "discord": "Deidril#2009",
       "url": "https://github.com/deidril",
       "email": "fmanisse@gmail.com",
-      "patreon": "https://www.patreon.com/deidril",
       "flags": {}
     }
   ],
-  "version": "2.03",
-  "compatibility": { "minimum": "11", "verified": "11", "maximum": "11" },
+  "version": "3.04",
+  "compatibility": { "minimum": "11", "maximum" : "11.315", "verified": "11.315" },
   "styles": [
-    "css/pf1/statblock.css", "css/pf1/blocks.css", "css/pf1/system.css",
-
+    "css/pf1/statblock.css",
+    "css/pf1/blocks.css",
+    "css/pf1/system.css",
     "css/pdfs/adventures.css",
-
-    "css/helyx/helyx.css", "css/helyx/helyx-conversions.css", "css/helyx/helyx-sections.css",
-    
-    "css/common/dialogs.css", "css/common/summary.css"
+    "css/helyx/helyx.css",
+    "css/helyx/helyx-conversions.css",
+    "css/helyx/helyx-sections.css",
+    "css/common/dialogs.css",
+    "css/common/summary.css"
   ],
-  "system": [ "pf1" ],
   "relationships": {
-    "systems":
-    [
-      { "id": "pf1", "type": "system", "compatibility": { "minimum": "9", "verified": "9.1" } }
+    "systems": [
+      {
+        "id": "pf1",
+        "type": "system",
+        "compatibility": { "minimum": "9", "maximum": "9.6", "verified": "9.6" }
+      }
     ]
   },
-  "scripts": [
-  ],
   "esmodules": [
     "src/helyx.bundle.js"
   ],
-  "packs": 
-  [
-    { 
-      "name": "deid-crypt-of-the-everflame-actors", "label": "Crypt of the Everflame - Actors", "system": "pf1", 
-      "path": "packs/crypt-of-the-everflame/actors", "type": "Actor",  
-      "ownership": { "PLAYER": "NONE","TRUSTED": "NONE","ASSISTANT": "NONE","GAMEMASTER": "OWNER" }, 
-      "flags": {}
-    } ,
-    { 
-      "name": "deid-crypt-of-the-everflame-items", "label": "Crypt of the Everflame - Items", "system": "pf1", 
-      "path": "packs/crypt-of-the-everflame/items", "type": "Item", 
-      "ownership": { "PLAYER": "NONE","TRUSTED": "NONE","ASSISTANT": "NONE","GAMEMASTER": "OWNER" }, 
-      "flags": {}
-    } ,
-    { 
-      "name": "deid-crypt-of-the-everflame-scenes", "label": "Crypt of the Everflame - Scenes", "system": "pf1", 
-      "path": "packs/crypt-of-the-everflame/scenes", "type": "Scene",
-      "ownership": { "PLAYER": "NONE","TRUSTED": "NONE","ASSISTANT": "NONE","GAMEMASTER": "OWNER" }, 
-      "flags": {}
-    }
-  ],
-  "packFolders": 
-  [{
-      "name": "Deidril Imports",
-      "sorting": "m",
-      "packs": [ ],
-      "folders": 
-      [{
-        "name": "Crypt of the Everflame",
-        "sorting": "m",
-        "packs": 
-        [
-          "deid-crypt-of-the-everflame-actors",
-          "deid-crypt-of-the-everflame-items",
-          "deid-crypt-of-the-everflame-scenes"
-        ]
-      }]
-  }],
-  "languages": [
+  "packs": [
     {
-        "lang": "fr",
-        "name": "Français",
-        "path": "lang/fr.json"
+      "name": "deid-crypt-of-the-everflame-actors",
+      "label": "Crypt of the Everflame - Actors",
+      "system": "pf1",
+      "path": "packs/crypt-of-the-everflame/actors",
+      "type": "Actor",
+      "ownership": {
+        "PLAYER": "NONE",
+        "TRUSTED": "NONE",
+        "ASSISTANT": "NONE",
+        "GAMEMASTER": "OWNER"
+      },
+      "flags": {}
     },
     {
-        "lang": "en",
-        "name": "English",
-        "path": "lang/en.json"
+      "name": "deid-crypt-of-the-everflame-items",
+      "label": "Crypt of the Everflame - Items",
+      "system": "pf1",
+      "path": "packs/crypt-of-the-everflame/items",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "NONE",
+        "TRUSTED": "NONE",
+        "ASSISTANT": "NONE",
+        "GAMEMASTER": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "deid-crypt-of-the-everflame-scenes",
+      "label": "Crypt of the Everflame - Scenes",
+      "system": "pf1",
+      "path": "packs/crypt-of-the-everflame/scenes",
+      "type": "Scene",
+      "ownership": {
+        "PLAYER": "NONE",
+        "TRUSTED": "NONE",
+        "ASSISTANT": "NONE",
+        "GAMEMASTER": "OWNER"
+      },
+      "flags": {}
     }
   ],
-  "issues": "https://github.com/deidril/pf1-pdf-en-import/issues",
+  "packFolders": [
+    {
+      "name": "Deidril Imports",
+      "sorting": "m",
+      "packs": [],
+      "folders": [
+        {
+          "name": "Crypt of the Everflame",
+          "sorting": "m",
+          "packs": [
+            "deid-crypt-of-the-everflame-actors",
+            "deid-crypt-of-the-everflame-items",
+            "deid-crypt-of-the-everflame-scenes"
+          ],
+          "folders": []
+        }
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "lang": "fr",
+      "name": "Français",
+      "path": "lang/fr.json",
+      "flags": {}
+    },
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json",
+      "flags": {}
+    }
+  ],
   "manifest": "https://github.com/deidril/pf1-pdf-en-import/releases/latest/download/module.json",
-  "download": "https://github.com/deidril/pf1-pdf-en-import/releases/download/2.03/pf1-pdf-en-import-2.03.zip"
+  "download": "https://github.com/deidril/pf1-pdf-en-import/releases/download/3.04/pf1-pdf-en-import-3.04.zip"
 }
