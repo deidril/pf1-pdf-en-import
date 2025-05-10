@@ -142,6 +142,11 @@
     margin: 15px;
 }
 
+.window-content .helyx-content div.helyx-block-section div.helyx-block-section-body .helyx-block-p
+{
+    color: #202020;
+}
+
 .window-content .helyx-content div.helyx-block-section-icon
 {
     padding-bottom: 10px;
@@ -223,11 +228,18 @@
     background-blend-mode: multiply;
   }
 
+.helyx-content div.helyx-block-read-section .helyx-block-p
+{
+    color: #5d0000;
+    
+}
+
 .helyx-content .helyx-block-p
 {
     text-indent: 20px;
     font-family: 'Vollkorn';
     font-size: 15px;
+    
 }
 
 .helyx-content .helyx-block-p a
@@ -306,6 +318,11 @@
     padding: 8px;
     display: flex;
     margin-top: 0px;
+}
+
+.window-content .helyx-content .helyx-statblock .helyx-p
+{
+    color: #202020;
 }
 
 
