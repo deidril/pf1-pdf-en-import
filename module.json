@@ -11,7 +11,7 @@
       "flags": {}
     }
   ],
-  "version": "5.07",
+  "version": "5.08",
   "compatibility": { "minimum": "13", "maximum" : "13", "verified": "13" },
   "styles": [
     "css/pf1/statblock.css",
@@ -31,6 +31,10 @@
         "type": "system",
         "compatibility": { "minimum": "11.4", "maximum": "11.99", "verified": "11.4" }
       }
+    ],    
+    "requires": 
+    [
+        { "id": "pf1-bestiary", "type": "module", "compatibility": { "verified": "0.1.6" } }
     ]
   },
   "esmodules": [
@@ -114,5 +118,5 @@
     }
   ],
   "manifest": "https://github.com/deidril/pf1-pdf-en-import/releases/latest/download/module.json",
-  "download": "https://github.com/deidril/pf1-pdf-en-import/releases/download/5.07/pf1-pdf-en-import-5.07.zip"
+  "download": "https://github.com/deidril/pf1-pdf-en-import/releases/download/5.08/pf1-pdf-en-import-5.08.zip"
 }
