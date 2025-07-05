@@ -1,0 +1,199 @@
+{
+    "name": "The Trail",
+    "navigation": true,
+    "navOrder": 0,
+    "navName": "",
+    "background": {
+      "src": "helyx/crypt-of-the-everflame/scenes/region-map.webp",
+      "scaleX": 1,
+      "scaleY": 1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "tint": null
+    },
+    "foreground": null,
+    "foregroundElevation": 20,
+    "thumb": "worlds/pf1e/assets/scenes/Iq2A3N2ss0FddBc0-thumb.webp",
+    "width": 968,
+    "height": 2400,
+    "padding": 0,
+    "initial": {
+      "x": null,
+      "y": null,
+      "scale": null
+    },
+    "backgroundColor": "#999999",
+    "grid": {
+      "type": 2,
+      "size": 100,
+      "color": "#000000",
+      "alpha": 0.2,
+      "distance": 5,
+      "units": "ft"
+    },
+    "tokenVision": true,
+    "fogExploration": true,
+    "fogReset": 1677235110849,
+    "globalLight": false,
+    "globalLightThreshold": null,
+    "darkness": 0,
+    "fogOverlay": null,
+    "fogExploredColor": null,
+    "fogUnexploredColor": null,
+    "drawings": [],
+    "tokens": [],
+    "lights": [],
+    "notes": [
+      {
+
+        "entryId": "Ew65ehLsi3i9rucc",
+        "pageId": "QZlOoroh7yBXd0KQ",
+        "text": "",
+        "x": 408,
+        "y": 584,
+        "global": false,
+        "iconSize": 40,
+        "texture": {
+          "tint": null,
+          "src": "icons/svg/book.svg",
+          "scaleX": 1,
+          "scaleY": 1,
+          "offsetX": 0,
+          "offsetY": 0,
+          "rotation": 0
+        },
+        "fontFamily": "Signika",
+        "fontSize": 32,
+        "textColor": "#FFFFFF",
+        "textAnchor": 1,
+        "_id": "xzW8Y4lm2qNEAuRb",
+        "flags": {         "helyx" : { "idname": "pf1en_cote_t1" } }
+      },
+      {
+
+        "entryId": "Ew65ehLsi3i9rucc",
+        "pageId": "dwIPKrjz63LCvySK",
+        "text": "",
+        "x": 441,
+        "y": 1241,
+        "global": false,
+        "iconSize": 40,
+        "texture": {
+          "tint": null,
+          "src": "icons/svg/book.svg",
+          "scaleX": 1,
+          "scaleY": 1,
+          "offsetX": 0,
+          "offsetY": 0,
+          "rotation": 0
+        },
+        "fontFamily": "Signika",
+        "fontSize": 32,
+        "textColor": "#FFFFFF",
+        "textAnchor": 1,
+        "_id": "f5zMkfmJS4t0GjWa",
+        "flags": {         "helyx" : { "idname": "pf1en_cote_t3" } }
+      },
+      {
+
+        "entryId": "Ew65ehLsi3i9rucc",
+        "pageId": "zgv1BgCE5BigEJZx",
+        "text": "",
+        "x": 350,
+        "y": 1011,
+        "global": false,
+        "iconSize": 40,
+        "texture": {
+          "tint": null,
+          "src": "icons/svg/book.svg",
+          "scaleX": 1,
+          "scaleY": 1,
+          "offsetX": 0,
+          "offsetY": 0,
+          "rotation": 0
+        },
+        "fontFamily": "Signika",
+        "fontSize": 32,
+        "textColor": "#FFFFFF",
+        "textAnchor": 1,
+        "_id": "30Oq4CVPdzcj6blO",
+        "flags": {         "helyx" : { "idname": "pf1en_cote_t2" } }
+      },
+      {
+
+        "entryId": "Ew65ehLsi3i9rucc",
+        "pageId": "gVNZXrbZxqlUaVRz",
+        "text": "",
+        "x": 415,
+        "y": 1671,
+        "global": false,
+        "iconSize": 40,
+        "texture": {
+          "tint": null,
+          "src": "icons/svg/book.svg",
+          "scaleX": 1,
+          "scaleY": 1,
+          "offsetX": 0,
+          "offsetY": 0,
+          "rotation": 0
+        },
+        "fontFamily": "Signika",
+        "fontSize": 32,
+        "textColor": "#FFFFFF",
+        "textAnchor": 1,
+        "_id": "HBTKzSZYjuPQMspg",
+        "flags": {         "helyx" : { "idname": "pf1en_cote_t4" } }
+      },
+      {
+
+        "entryId": "Ew65ehLsi3i9rucc",
+        "pageId": "y2w9eSV8PBIjXs0g",
+        "text": "",
+        "x": 450,
+        "y": 2050,
+        "global": false,
+        "iconSize": 40,
+        "texture": {
+          "tint": null,
+          "src": "icons/svg/book.svg",
+          "scaleX": 1,
+          "scaleY": 1,
+          "offsetX": 0,
+          "offsetY": 0,
+          "rotation": 0
+        },
+        "fontFamily": "Signika",
+        "fontSize": 32,
+        "textColor": "#FFFFFF",
+        "textAnchor": 1,
+        "_id": "6Br1eifBBGRVc31C",
+        "flags": {         "helyx" : { "idname": "pf1en_cote_t5" } }
+      }
+    ],
+    "sounds": [],
+    "templates": [],
+    "tiles": [],
+    "walls": [],
+    "playlist": null,
+    "playlistSound": null,
+    "journal": null,
+    "journalEntryPage": null,
+    "weather": "",
+    "flags": {
+      "exportSource": {
+        "world": "pf1e",
+        "system": "pf1",
+        "coreVersion": "10.291",
+        "systemVersion": "0.82.5"
+      }
+    },
+    "_stats": {
+      "systemId": "pf1",
+      "systemVersion": "0.82.5",
+      "coreVersion": "10.291",
+      "createdTime": 1677235110853,
+      "modifiedTime": 1677235195690,
+      "lastModifiedBy": "EEbHu9HWsgh6HwZr"
+    }
+  }
