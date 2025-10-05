@@ -2,3 +2,13 @@
 {
     line-height: 25px;
 }
+
+.helyx-content p.helyx-item-list b
+{
+    color: #f8f8eb;
+}
+
+.helyx-content div.helyx-block-section-body p.helyx-item-list b
+{
+    color: black;
+}
