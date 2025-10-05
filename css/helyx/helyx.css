@@ -95,7 +95,6 @@
     border-bottom: 2px solid #C5A924;
     border-left: 1px solid #C5A924;
     border-right: 1px solid #C5A924;
-    box-shadow: 12px 5px 5px grey;
     padding: 1em;
     text-indent: 20px;
     font-family: Roboto;
@@ -298,9 +297,12 @@
 
 .window-content .helyx-content .helyx-block-box img.helyx-token-icon
 {
-    width: 40px;
-    height: 40px;
+    width: 90px;
+    height: 90px;
     border: none;
+    position: relative;
+    top: -16px;
+    left: -5px;
 }
 
 
@@ -308,7 +310,7 @@
 .window-content .helyx-content .helyx-block-box div.helyx-block-box-title
 {
     color: white;
-    padding: 8px;
+    height: 65px;
     display: flex;
 }
 .window-content .helyx-content .helyx-block-box div.helyx-block-exploration-title
@@ -383,8 +385,14 @@
 }
 .window-content .helyx-content .helyx-block-box div.helyx-block-box-title div.helyx-block-box-title-listing span
 {
-    margin-top: 0px;
+    background: darkred;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 0px;
     margin-left: 5px;
+    margin: 10px;
+    height: min-content;
 }
 .window-content .helyx-content .helyx-block-box div.helyx-block-box-title h3
 {
@@ -410,7 +418,7 @@
 .window-content .helyx-content .helyx-block-box div.helyx-block-box-title span.helyx-creature-amount
 {
     padding-top: 15px;
-    font-size: large;
+    font-size: 20px;
     position: relative;
     top: -8px;
     left: 8px;
@@ -432,8 +440,14 @@
 
 .window-content .helyx-content .helyx-block-box div.helyx-block-box-title a.content-link
 {
-    background: var(--light);
-    border: 2px solid black;
+    background: darkred;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 0px;
+    margin-left: 5px;
+    margin: 10px;
+    height:min-content;
 }
 
 /*                  Specific */ 
