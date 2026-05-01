@@ -15633,6 +15633,7 @@ var pdfjs = pdf;
 
 export default pdfjs;
 
+
 export class Deidril_COMPENDIUM_ART_API
 {
 
@@ -18634,6 +18635,12 @@ export class HelyxPdfPosition
     /// @brief      Height of the rectangle
     #height = NaN;
 
+    /// @brief      External data source from a filename
+    #filename = null;
+
+    /// @brief      Expected size of the data source
+    #size = NaN;
+
     /** @} **/ /*****************************************************************/
     /** \name   Constructors
     **/ /** @{ ******************************************************************/
@@ -18662,6 +18669,10 @@ export class HelyxPdfPosition
     get y()      { return this.#y; }
     get width()   { return this.#width;  }
     get height()  { return this.#height; }
+    get w()   { return this.#width;  }
+    get h()  { return this.#height; }
+    get filename() { return this.#filename; }
+    get size() { return this.#size; }
 
     set(attribute_, value_)
     {
@@ -18673,6 +18684,8 @@ export class HelyxPdfPosition
             case 'y' : this.#y = value_; break;
             case 'w' : case 'width': this.#width = value_; break;
             case 'h' : case 'height': this.#height = value_; break;
+            case 'filename': this.#filename = value_; break;
+            case 'size': this.#size = value_; break;
             default: throw "Unimplemented attribute '" + attribute_ + "' in HelyxPdfPosition";
         }
     }      
@@ -18685,11 +18698,16 @@ export class HelyxPdfPosition
 
     write(output_)
     {
-        let atts = ['page']; 
+        let atts = []; 
+
+        if(this.#page >= 0) atts.push('page');
         if(this.#index >= 0) atts.push('index');
         if(this.is_xy()) atts.push('x', 'y');
-        if(!isNaN(this.#width)) atts.push('width');
-        if(!isNaN(this.#height)) atts.push('height');
+        if(!isNaN(this.#width)) atts.push('w');
+        if(!isNaN(this.#height)) atts.push('h');
+        if(this.#size) atts.push('size');
+        if(this.#filename) atts.push('filename');
+
         return output_.inlined_attributes(this,  atts);
     }   
 
@@ -18718,6 +18736,9 @@ export class HelyxFont
     /// @brief     Font index ?
     #index          = null;
 
+    /// @brief     If true, skip all content usign this font
+    #skip           = false;
+
     /** @} **/ /*****************************************************************/
     /** \name   Constructors
     **/ /** @{ ******************************************************************/
@@ -18740,6 +18761,7 @@ export class HelyxFont
     get roles()             { return this.#roles; }
     get glyphs()            { return this.#glyphs; }
     get index()             { return this.#index; }
+    get skip()              { return this.#skip; }
 
     set(attribute_, value_)
     {
@@ -18756,6 +18778,7 @@ export class HelyxFont
             case 'roles'       : this.#roles = value_; break; 
             case 'glyphs'      : this.#glyphs = value_; break; 
             case 'index'       : this.#index = value_; break;
+            case 'skip'        : this.#skip = value_; break;
 
             default: throw "Unimplemented attribute '" + attribute_ + "' in HelyxFont";
         }
@@ -18770,7 +18793,11 @@ export class HelyxFont
     write(output_)
     {
         output_.field('src',this.#src);
-        output_.inlined_attributes(this,  [ 'position','flags', 'roles', 'glyphs', 'index']);
+
+        let attributes = [ 'position','flags', 'roles', 'glyphs', 'index' ];
+        if(this.#skip == true) { attributes.push('skip'); }
+        
+        output_.inlined_attributes(this,  attributes);
     }       
 }
 export class HelyxContent 
@@ -18851,8 +18878,43 @@ export class HelyxContent
     /** \name   Static methods
     **/ /** @{ ******************************************************************/    
 
+    static split_pf2_tags(str) 
+    {
+
+        let results =[];
+        let args = str.substr(0, str.length-3).substr(11).split(" ");
+
+        for(let i = 0; i < args.length; i += 2)
+        {
+            let index = parseInt(args[i]);
+            let tag = args[i + 1];
+
+            if(tag.startsWith("'") && tag.endsWith("'"))
+            { tag = tag.substring(1, tag.length - 1); }
+            if(tag.startsWith('"') && tag.endsWith('"'))
+            { tag = tag.substring(1, tag.length - 1); }
+
+            results.push(`{{{pf2tags ${index} '${tag}'}}}`);
+        }
+
+        return results;
+    }
+
     static from_raw(value_)
     {
+        if(Deid.is_string(value_) && value_.startsWith("{{{pf2tags") && value_.endsWith("}}}") )
+        {
+            let parts = HelyxContent.split_pf2_tags(value_);
+            let contents = [];
+            for(let part of parts)
+             {
+                const content = new HelyxContentInstruction();
+                content.parse(part);
+                contents.push(content);
+            }
+            return contents;
+        }
+
         let parts = value_.split(/(\{\{\{[\s\S]*?\}\}\}|\{\{[\s\S]*?\}\})/g);
         parts = parts.filter(part => part !== '');
         const contents = parts.map(part => {
@@ -18901,7 +18963,13 @@ export class HelyxContentInstruction
     /// @brief      Position in the pdf (page + index or x/y + with + height)
     #src            = null;
 
-    /// @brief      Raw content
+    /// @brief      Compendium
+    #compendium     = null;
+
+    /// @brief      Target idname
+    #target         = null;
+
+    /// @brief      Raw content, or name of an entry in the compendium
     #raw            = null;
 
     /// @brief      Length 
@@ -18949,6 +19017,7 @@ export class HelyxContentInstruction
 
     get from_slice()        { return this.#from_slice; }
     get slice_length()     { return this.#slice_length; }
+    get target()           { return this.#target; }
     
     set(attribute_, value_)
     {
@@ -18969,6 +19038,7 @@ export class HelyxContentInstruction
 
             case 'from_slice' : this.#from_slice = value_; break;
             case 'slice_length' : this.#slice_length = value_; break;
+            case 'target' : this.#target = value_; break;
     
             default: throw "Unimplemented attribute '" + attribute_ + "' in HelyxContentInstruction";
         }
@@ -19009,7 +19079,7 @@ export class HelyxContentInstruction
             case 'xlf': case 'pxlf': case 'sbxlf':
                 res += " " + this.#src.index + " " + this.#length + " '" + this.#flags.tos() +"'";
                 break;
-            case 'xf':
+            case 'xf': case 'pxf':
                 res += " " + this.#src.index + " '" + this.#flags.tos() +"'";
                 break;    
             case 'xl': case 'pxl':
@@ -19027,6 +19097,25 @@ export class HelyxContentInstruction
             case 'slicexylf':
                 res += " " + this.#src.page + " " + this.#src.x + " " + this.#src.y + " " + this.#length + " '" + this.#flags.tos() +"' " + this.#from_slice + " " + this.#slice_length;
                 break;    
+            case 'packlnk': 
+                res += " '" + this.#compendium + "' '" + this.#raw + "'";
+                break;
+            case 'lnk':
+                res += " '"   + this.#raw + "' '" + this.#target + "'";
+                break;  
+            case 'helyx':
+                res += " '" + this.#raw + "' " + this.#length;
+                break;           
+            case 'hr':
+                break;    
+            case 'pf2tags':
+                res += " " + this.#src.index + " '" + this.#raw + "'";
+                break;
+            case 'xytags':
+                res += " " + this.#src.page + " " + this.#src.x + " " + this.#src.y + " '" + this.#raw + "'";
+                break;
+           
+    
             default:
                 throw "Unimplemented content type '" + this.#op + "'";
         }
@@ -19067,7 +19156,10 @@ export class HelyxContentInstruction
         }
 
         value_ = this.extract_handlebar_content(value_);
-        let components = value_.split(' ');
+
+        let components = value_.match(/(?:[^\s']+|'[^']*')+/g)
+            .map(arg => arg.replace(/^'|'$/g, ""));
+        //let components = value_.split(' ');
         if(components.length == 0)
         {
             this.#op = "null";
@@ -19076,7 +19168,22 @@ export class HelyxContentInstruction
 
         switch(components[0])
         {
-            case 'xlf': case 'sbxlf':
+            case 'pf2tags':
+            {
+                this.#op = components[0];
+                this.#src = new HelyxPdfPosition({index: parseInt(components[1])});
+                this.#length = 1;
+                this.#raw = components[2];
+                break;
+            }
+            case 'xytags':
+            {
+                this.#op = components[0];
+                this.#src = new HelyxPdfPosition({page: parseInt(components[1]), x: parseInt(components[2]), y: parseInt(components[3])});
+                this.#raw = components[4];
+                break;
+            }
+            case 'xlf': case 'sbxlf': case 'pxlf':
             {
                 if(components.length != 4)
                 { throw "Invalid xlf handlebar format: " + value_; }
@@ -19096,11 +19203,11 @@ export class HelyxContentInstruction
                 this.#length = parseInt(components[2]);
                 break;
             }
-            case 'xf' :
+            case 'xf' : case 'pxf': 
             {
                 if(components.length != 3)  
                 { throw "Invalid xf handlebar format: " + value_; }
-                this.#op = "xf";
+                this.#op = components[0];
                 this.#src = new HelyxPdfPosition({index: parseInt(components[1])});
                 this.#length = 0;
                 this.#flags = new HelyxTextOptions(components[2]);
@@ -19151,7 +19258,7 @@ export class HelyxContentInstruction
                 this.set('flags', components[4]);
                 break;
             }
-            case 'xylf': case 'sbxylf':
+            case 'xylf': case 'sbxylf': case 'pxylf':
             {
                 if(components.length != 6)
                 { throw "Invalid xylf handlebar format: " + value_; }
@@ -19159,6 +19266,42 @@ export class HelyxContentInstruction
                 this.set('src', { page: parseInt(components[1]), x: parseInt(components[2]), y: parseInt(components[3]) });
                 this.#length = parseInt(components[4]);
                 this.set('flags', components[5]);
+                break;
+            }
+            case 'packlnk': 
+            {
+                this.#op = "packlnk";
+                if(components.length != 3)
+                { throw "Invalid packlnk handlebar format: " + value_; }
+                this.#compendium = components[1];
+                this.#raw = components[2];
+                break;
+            }
+            case 'lnk':
+            {
+                this.#op = "lnk";
+                if(components.length != 3)
+                { throw "Invalid lnk handlebar format: " + value_; }
+                this.#raw = components[1];
+                this.#target = components[2];
+                break;
+            }
+            case 'helyx':
+            {
+                this.#op = "helyx";
+                if(components.length != 3)
+                { throw "Invalid helyx handlebar format: " + value_; }
+
+                this.#raw = components[1];
+                this.#length = parseInt(components[2]);
+                break;
+
+            }
+            case 'hr':
+            {
+                this.#op = "hr";
+                if(components.length != 1)
+                { throw "Invalid hr handlebar format: " + value_; }
                 break;
             }
             default:
@@ -19281,6 +19424,9 @@ export class HelyxSourceSystem
     /// @brief      Template type
     #template = null;
 
+    /// @brief      Includes files
+    #includes = null;
+
     /** @} **/ /*****************************************************************/
     /** \name   Constructors
     **/ /** @{ ******************************************************************/
@@ -19303,6 +19449,7 @@ export class HelyxSourceSystem
     get compendium() { return this.#compendium; }
     get name()       { return this.#name; }
     get ref()        { return this.#ref; }
+    get includes()   { return this.#includes; }
 
 
     set(attribute_, value_)
@@ -19315,6 +19462,7 @@ export class HelyxSourceSystem
             case 'compendium' : this.#compendium = value_; break;
             case 'name' : this.#name = value_; break;
             case 'ref'  : this.#ref = value_; break;
+            case 'includes' : this.#includes = value_; break;
             default: throw "Unimplemented attribute '" + attribute_ + "' in HelyxSourceSystem ";
         }
     }
@@ -19327,7 +19475,8 @@ export class HelyxSourceSystem
 
     write(output_)
     {
-        return output_.inlined_attributes(this,  [ 'name', 'type', 'template', 'compendium', 'ref']);
+
+        return output_.inlined_attributes(this,  [ 'name', 'type', 'template', 'compendium', 'ref', 'includes']);
     }
 
 }
@@ -19873,6 +20022,7 @@ export class HelyxImageTransformation
 
     get flip()        { return this.#flip; }
     get rotation  ()     { return this.#rotation; }
+    get empty() { return this.#flip === null && this.#rotation === null; }
 
     set(attribute_, value_)
     {
@@ -19966,7 +20116,13 @@ export class HelyxToken
     **/ /** @{ ******************************************************************/
 
     /// @brief      Position in the source image of the token area
-    #from = null;
+    #x = null;
+
+    #y = null;
+
+    #width = null;
+
+    #height = null;
 
     /// @brief      Idname of the token
     #idname = null;
@@ -19976,6 +20132,12 @@ export class HelyxToken
 
     /// @brief      Model to use to produce the token
     #model = null;
+
+    ///@brief       Background color
+    #background = null;
+
+    ///@brief       Shape
+    #shape = null;
 
     /** @} **/ /*****************************************************************/
     /** \name   Constructors
@@ -19993,23 +20155,46 @@ export class HelyxToken
     /** \name   Getters, setters
     **/ /** @{ ******************************************************************/
 
-    get from()  { return this.#from;  }
+    get x()  { return this.#x;  }
+    get y()  { return this.#y;  }
+    get width()  { return this.#width;  }
+    get height()  { return this.#height;  }
+    get w()  { return this.#width;  }
+    get h()  { return this.#height;  }
     get idname()  { return this.#idname; }
     get target()  { return this.#target; }
     get model()   { return this.#model; }
+    get background() { return this.#background; }
+    get shape() { return this.#shape; }
 
     set(attribute_, value_)
     {
         switch(attribute_)
         {
-            case 'from'    : this.#from =  Deid.build(HelyxRectangle, value_); break;
+            case 'x'    : this.#x = value_; break;
+            case 'y'    : this.#y = value_; break;
+            case 'width' : case 'w'   : this.#width = value_; break;
+            case 'height' : case 'h'   : this.#height = value_; break;
             case 'idname'  : this.#idname   = value_; break;
             case 'target'  : this.#target = value_; break;
             case 'model'   : this.#model = value_; break;
+            case 'background' : this.#background = value_; break;
+            case 'shape': this.#shape = value_; break;
 
             default: throw "Unimplemented attribute '" + attribute_ + "' in HelyxToken ";
         }
     }         
+
+    /** @} **/ /*****************************************************************/
+    /** \name   Custom Serialization
+    **/ /** @{ ******************************************************************/
+
+    inlined() { return true ; }
+
+    write(output_)
+    {
+        output_.inlined_attributes(this,  ['x','y','w','h','idname','target','background','shape','model']);
+    }     
 
 }    
 export class HelyxTokens
@@ -20071,7 +20256,7 @@ export class HelyxImage
     **/ /** @{ ******************************************************************/
 
     /// @brief              In the case the image has to be imported from the pdf, it describes its position inside
-    #pdf = null;
+    #position = null;
 
     /// @brief              Idname of the token
     #idname = null;
@@ -20101,7 +20286,7 @@ export class HelyxImage
     /** \name   Getters, setters
     **/ /** @{ ******************************************************************/
 
-    get pdf     ()          { return this.#pdf; }
+    get position()          { return this.#position; }
     get idname  ()          { return this.#idname; }    
     get target  ()          { return this.#target; }   
     get tokens  ()          { return this.#tokens; }   
@@ -20111,10 +20296,10 @@ export class HelyxImage
     {
         switch(attribute_)
         {
-            case 'pdf': this.#pdf = Deid.build(HelyxPdfPosition, value_); break;
+            case 'position': this.#position = Deid.build(HelyxPdfPosition, value_); break;
             case 'idname': this.#idname = value_; break;
 
-            case 'target' : this.target = value_; break;
+            case 'target' : this.#target = value_; break;
             case 'tokens' : this.#tokens =  Deid.build_array(HelyxToken, value_); break;
             case 'transformation' : this.#transformation = Deid.build(HelyxImageTransformation, value_); break;
 
@@ -20130,8 +20315,14 @@ export class HelyxImage
 
     write(output_)
     {
-        output_.inlined_attributes(this,  ['pdf','idname','target','transformation']);
-        output_.field('tokens',this.#tokens);
+        output_.field('position',this.#position);
+        output_.inlined_attributes(this,  ['idname','target']);
+        if(this.#transformation && (false == this.#transformation.empty))
+        { output_.field('transformation', this.#transformation); }
+
+        let are_tokens_inlined = ( this.#tokens.length == 1) && (this.#tokens[0].inlined);
+        let is_aligned = are_tokens_inlined ? false : true;
+        output_.array('tokens', this.#tokens, { inlined: are_tokens_inlined, aligned: is_aligned, backtab: false });
     } 
 }
 
@@ -21083,7 +21274,7 @@ export class HelyxJournalBlockSpell  extends HelyxJournalBlockEntitySheet
 
     write(output_)
     {
-
+        super.write(output_);
     }      
 }
 
@@ -22444,9 +22635,26 @@ tos(page)
 {
     let html = '';
     let images = this.#images.get(page);
-    for(const [index, descriptor] of images)
+    
+    if(images) for(const [index, descriptor] of images)
     {
         html += "<pre>" + JSON.stringify(descriptor) + "</pre>\n";
+    }
+    return html;    
+}
+
+html(page)
+{
+    let html = '';
+    let first = true;
+    let images = this.#images.get(page);
+    if(images) for(const [index, descriptor] of images)
+    {
+        let str = JSON.stringify(descriptor);
+        if((str == undefined) || (str == "")) { continue; }
+
+        if(first) { first = false; } else { html += ", " }
+        html += str + "\n";
     }
     return html;    
 }
@@ -24242,6 +24450,25 @@ export class HelyxBlockCreature extends HelyxPart
         return "<span class='helyx-creature-amount'>" +  amount + "</span>";
     }
 
+    _tags(tags)
+    {
+        if(!tags)
+        { return ""; }  
+
+        let res = "<section class='helyx-tags'> ";
+
+        if(tags instanceof Array)
+        {
+            for(let t of tags)
+            { res += Deid.compile(t); }
+        }
+        else
+        { res += Deid.compile(tags); }
+
+        res += "</section>";
+        return res;
+    }
+
     render(ex)
     {
         let result = "<div class='helyx-block-box'>";        
@@ -24255,7 +24482,7 @@ export class HelyxBlockCreature extends HelyxPart
                 + this._actors_link(ex)
                 + this._amount(ex)
                 + "</div>"
-                + (ex.tags ? Deid.compile(ex.tags) : "")
+                + this._tags(ex.tags)
                 + "</div>"
          ;
     
@@ -25190,6 +25417,11 @@ export class HelyxConfiguration
             If true, consider items are always loaded
         */
         this.bundled = false;
+
+        /*
+            If true, the module is executed on 'forge'
+        */
+        this.forge = false;    
     };    
 }    
 export class HelyxBlankAdventure
@@ -25390,6 +25622,18 @@ export class HelyxHandleBars extends HelyxPart
 
         });             
 
+        Handlebars.registerHelper("xytags", function(page, x, y, color)
+        {
+            let res = "";
+            let content = new HelyxContentInstruction({op: 'xyl', src:{ page: page, x: x, y: y}, length: 1});
+            res += '<span class="helyx-tag"';
+            res +=' style="background-color: var(--' + color + ');"';
+            res += '">' + myself.read_content(content) + '</span> ';
+            
+            
+            return res;
+        });        
+
         Handlebars.registerHelper("lnk", function(typeLink, idname)
         {
             return myself._link( { type: typeLink, idname: idname} );
@@ -25475,6 +25719,26 @@ export class HelyxHandleBars extends HelyxPart
             */   
         });
 
+        Handlebars.registerHelper("helyx", function(code, begin)
+        {
+            if(begin)
+            {
+                switch(code)
+                {
+                    case "details" : return "<div class='helyx-action-details'>";
+                    case "p": return "<p class='helyx-p'>";
+                }
+            }
+            else
+            {
+                switch(code)
+                {
+                    case "details" : return "</div>";
+                    case "p": return "</p>";
+                }
+            }
+        });
+/*
         Handlebars.registerHelper("details",function()
         {
             const options = arguments[arguments.length - 1];
@@ -25489,7 +25753,7 @@ export class HelyxHandleBars extends HelyxPart
             result += "</div>"
             return result;
         });
-
+*/
         Handlebars.registerHelper("hr",function()
         {
             return '<hr/>';
@@ -25952,6 +26216,9 @@ export class PdfContent {
         let length = 1;
 
         let str = "";
+
+        if( this.indexes[position_.page] == undefined)
+        { return null; }
 
         let results = this.indexes[position_.page][str_index];
         if(results)
@@ -26470,8 +26737,7 @@ export class HelyxPF2 extends HelyxPart
     {
         Handlebars.registerHelper("pf2tags", function( )
         {
-            let res = '<section class="helyx-tags"> '
-            
+            let res = "";            
             for(let i = 0; i < arguments.length - 1; i +=2)
             {
                 let val = arguments[i];
@@ -26484,11 +26750,11 @@ export class HelyxPF2 extends HelyxPart
                 if(color.length)
                 { res +=' style="background-color: var(--' + color + ');"'; }
 
-                res += '">' + tagStr + '</span> ';
+                res += '>' + tagStr + '</span> ';
             }
-            res += '</section>';
             return res;
         });
+
     }
 
     initGameSystemHandlebarsHelpers()
@@ -28410,6 +28676,26 @@ export class StateImportImages extends HelyxState
         return cn;
     }
 
+    #token_color(entry_)
+    {
+        if(entry_.color)
+        { return entry_.color; }
+
+        if(entry_.model)
+        {
+            switch(entry_.model)
+            {
+                case 'green_marble': return "green";
+                case 'red_evil': return "red";
+                case 'green_bamboo': return "green";
+
+                default: return "green";
+            }
+        }
+
+        return "green";
+    }
+
     #save_colored_ring(context_, token_entry_)
     {
         const ring_width = token_entry_.w / 15;
@@ -28434,7 +28720,7 @@ export class StateImportImages extends HelyxState
         ctx.drawImage(mask, 0, 0);
 
         ctx.lineWidth = ring_width;
-        ctx.strokeStyle = token_entry_.color ?? "green";
+        ctx.strokeStyle = this.#token_color(token_entry_);
         ctx.stroke();
 
         return cn;
@@ -28443,7 +28729,7 @@ export class StateImportImages extends HelyxState
     #resolve_token_type(token_entry_)
     {
         if(token_entry_.shape && token_entry_.shape == "rect")      return 'rectangle';
-        if(token_entry_.model) return 'custom_ring';
+        if(token_entry_.model  && (game.helyx.config.forge == false)) return 'custom_ring';
 
         return 'colored_ring';
 
@@ -28598,7 +28884,7 @@ export class StateImportImages extends HelyxState
         for(let img of images.values())
         {
             let position = img.position; 
-            if((position.x) && (position.y) && (position.x != NaN) && (position.y != NaN))
+            if((position.x != null) && (position.y != null) && (position.x != NaN) && (position.y != NaN))
             {
                 images_per_position.push(img);
                 continue;
@@ -28651,6 +28937,26 @@ export class StateImportImages extends HelyxState
 
             if((img.position.skip) && (img.position.skip != 0))
             { img.position.skip --; continue; }
+            
+            if((img.position.w) && (arg[1] != img.position.w))
+            { continue; }
+
+            if((img.position.h) && (arg[2] != img.position.h))
+            { continue; }
+
+            if(img.position.size)
+             {
+                let obj = await this.#obj(page_, arg[0]); 
+                if(obj == null) continue;
+                if(obj.data.length != img.position.size) continue;
+             }
+
+            if(img.count == null) img.count = 0;
+            img.count ++;
+            if(img.count > 1)
+            { 
+                Deid.Log.error("Image " + img.idname + " is duplicated at index " + i + " of page " + page_number_ + " with position " + JSON.stringify(img.position)); 
+            }
 
             await this.#do_import_image(img, page_, arg, fn);
 
@@ -29130,24 +29436,55 @@ async #import_from_compendium(item_, source_, entity_type_)
     async #import_actor(_item)
     {
         const source = _item.helyx.source(game.system.id);
-        if(source.type == "compendium")
-        {
-            let model = await this.#import_from_compendium(_item, source, 'Actor');
-            this.#complete_actor_model(model, _item);
-            let imported = await Actor.implementation.create(model);
-            //await imported.prepareBaseData();
-            await this.#complete_import(imported, _item);
 
-            let message = game.i18n.format("Helyx.Advance.ActorImported", {name: _item.finalName});
-            this.advance("item", message);
+        let model = null;
+        switch(source.type)
+        {
+            case "compendium": 
+            {
+                model = await this.#import_from_compendium(_item, source, 'Actor'); 
+                break;
+            }
+            case "json":
+            {
+                model = { includes: source.includes };
+                model = await Deid.load_included_files(model);
+                model.includes = null;
+                this.#generic_model(model, _item);
+                break;
+            }    
+            default: 
+            {
+                Deid.Log.error("Import actor #" + _item.helyx.idname + " with unimplemented source type '" + source.type + "'");
+                return;
+            }
         }
+
+        this.#complete_actor_model(model, _item);
+        let imported = await Actor.implementation.create(model);
+
+        await this.#complete_import(imported, _item);
+
+        let message = game.i18n.format("Helyx.Advance.ActorImported", {name: _item.finalName});
+        this.advance("item", message);
+        
     }
 
     #complete_item_model(template, ex)
     {
 
         if(ex.name && ex.name.length != 0)
-        { template.name = this.contents(ex.name); }
+        { 
+            let strname = this.contents(ex.name);
+            if(strname == null || strname.length == 0)
+            {
+                Deid.Log.error("In item #" + ex.helyx.idname + ", failed to compute name, got '" + strname + "' from '" + ex.name + "'");                
+            } 
+            else
+            {
+                template.name = strname;
+            }
+        }
 
         delete template._id;
 
@@ -31834,7 +32171,7 @@ export class HelyxCryptOfTheEverflame
 										"type": "Item",
 										"sources": {
 											"pf1": {
-												"name": "Bullseye Lantern",
+												"name": "Bullseye lantern",
 												"type": "compendium",
 												"compendium": "pf1.items"
 											}
@@ -36090,8 +36427,6 @@ async load_art_map_file(descriptor_)
 // Initialize the array of tokens from token_files
 async init_tokens()
 {
-    if(game.helyx_settings == null)
-    { return; }
 
     const adventures = this.config.modeMaker ? game.helyx_settings.descriptors.values() : this.adventures;
     const mode_maker = this.config.modeMaker ?? false;
@@ -36112,11 +36447,19 @@ async init_tokens()
 }
 Hooks.on("renderSettings", function(app_, html_)
 {
-    if(game.user.isGM)
-    {    
-            const s=document.createElement("template");
+    if(!(game.release.generation>=13))
+    { return; }
+
+    if(!(app_ instanceof CONFIG.ui.settings))
+    { return; }
+
+    if(!game.user.isGM)
+    {  return; }
+
+
+    const s=document.createElement("template");
         
-            s.innerHTML=
+    s.innerHTML=
                 '<section class="flexcol" id="helyx">\n'+
                   '<h4 class="divider">Helyx</h4>\n' +    
                     '<button type="button" data-action="helyx-import-pdf">\n' +
@@ -36124,30 +36467,13 @@ Hooks.on("renderSettings", function(app_, html_)
                     '</button>\n'+            
                  '</section>';
              
-            Object.assign
-            (
-                app_.options.actions,
-                {
-                    "helyx-import-pdf":()=>game.helyx.when_import_pdf()
-                }
-            );
+    Object.assign
+    (
+        app_.options.actions,
+        { "helyx-import-pdf":()=>game.helyx.when_import_pdf() }
+    );
                 
-            html_.querySelector("section.info").after(s.content);
-
-
-        const importButton=$(
-            '<button id="helyx-import-pdf" data-action="helyx-import-pdf">'
-            + '<i class="fas fa-fire"></i> Helyx - Import PDF'
-            + '</button>'
-            
-            );
-            html_.find("#settings-game").prepend(importButton);
-        importButton.on
-        (
-            "click",
-            (()=>{ game.helyx.when_import_pdf(); })
-        );    
-    }    
+    html_.querySelector("section.info").after(s.content);
 
 })
 
@@ -36164,6 +36490,7 @@ Hooks.on("ready", async function ()
     h.config.extractPDFDetails = false;
     h.acceptUnknowPdf = false;
     h.config.moduleName="pf1-pdf-en-import";
+    h.config.forge = game.modules.has("forge-vtt");
 
     Deid.Log.FILTER.report = false;
     Deid.Log.FILTER.error  = false;
