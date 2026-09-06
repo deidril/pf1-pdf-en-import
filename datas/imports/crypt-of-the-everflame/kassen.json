@@ -1,404 +1,32 @@
 {
-
-  "name": "kassen",
-  "navigation": true,
-  "navOrder": 0,
+  "name": "town",
+  "navigation": false,
   "navName": "",
-  "background": {
-    "src": "helyx/crypt-of-the-everflame/scenes/town.webp",
-    "scaleX": 1,
-    "scaleY": 1,
-    "offsetX": 0,
-    "offsetY": 0,
-    "rotation": 0,
-    "tint": null
-  },
-  "foreground": null,
-  "foregroundElevation": 20,
-  "thumb": "worlds/pf1/assets/scenes/qEbp7wWLYi9edIwY-thumb.webp",
+  "thumb": "worlds/pf1-dev/assets/scenes/thumb-ERJqItbCvyeajdG0F_lxvA.webp",
   "width": 2700,
   "height": 2048,
   "padding": 0,
   "initial": {
     "x": 1578,
     "y": 970,
-    "scale": 0.4797384989045058
+    "scale": 0.48
   },
-  "backgroundColor": "#999999",
   "grid": {
     "type": 0,
     "size": 100,
     "color": "#000000",
     "alpha": 0.2,
     "distance": 5,
-    "units": "ft"
+    "units": "ft",
+    "style": "solidLines",
+    "thickness": 1
   },
   "tokenVision": true,
-  "fogExploration": true,
-  "fogReset": 1676997487872,
-  "globalLight": false,
-  "globalLightThreshold": null,
-  "darkness": 0,
-  "fogOverlay": null,
-  "fogExploredColor": null,
-  "fogUnexploredColor": null,
   "drawings": [],
   "tokens": [],
   "lights": [],
-  "notes": [
-    {
-      "entryId": "R0b1SHkjMWbiRsDN",
-      "pageId": "6umdDIur7OX9I3I1",
-      "text": "1",
-      "x": 902,
-      "y": 892,
-      "global": false,
-      "iconSize": 40,
-      "texture": {
-        "tint": null,
-        "src": "icons/svg/book.svg",
-        "scaleX": 1,
-        "scaleY": 1,
-        "offsetX": 0,
-        "offsetY": 0,
-        "rotation": 0
-      },
-      "fontFamily": "Signika",
-      "fontSize": 32,
-      "textColor": "#FFFFFF",
-      "textAnchor": 1,
-      "_id": "yNguX6KruwJO2FbM",
-      "flags": {
-              "helyx" : { "idname": "pf1en_cote_k1" }
-      }
-    },
-    {
-
-      "entryId": "R0b1SHkjMWbiRsDN",
-      "pageId": "D3uNWzUYpnVhROXE",
-      "text": "2",
-      "x": 1202,
-      "y": 802,
-      "global": false,
-      "iconSize": 40,
-      "texture": {
-        "tint": null,
-        "src": "icons/svg/book.svg",
-        "scaleX": 1,
-        "scaleY": 1,
-        "offsetX": 0,
-        "offsetY": 0,
-        "rotation": 0
-      },
-      "fontFamily": "Signika",
-      "fontSize": 32,
-      "textColor": "#FFFFFF",
-      "textAnchor": 1,
-      "_id": "WO6oEXrHwp7tyvvk",
-      "flags": {
-              "helyx" : { "idname": "pf1en_cote_k2" }
-      }
-    },
-    {
-
-      "entryId": "R0b1SHkjMWbiRsDN",
-      "pageId": "BetJDMvWryIAgCEx",
-      "text": "3",
-      "x": 1464,
-      "y": 703,
-      "global": false,
-      "iconSize": 40,
-      "texture": {
-        "tint": null,
-        "src": "icons/svg/book.svg",
-        "scaleX": 1,
-        "scaleY": 1,
-        "offsetX": 0,
-        "offsetY": 0,
-        "rotation": 0
-      },
-      "fontFamily": "Signika",
-      "fontSize": 32,
-      "textColor": "#FFFFFF",
-      "textAnchor": 1,
-      "_id": "9ukNglxs4k0Iq6G4",
-      "flags": {
-              "helyx" : { "idname": "pf1en_cote_k3" }
-      }
-    },
-    {
-
-      "entryId": "R0b1SHkjMWbiRsDN",
-      "pageId": "L1oDv286V9xn0coY",
-      "text": "4",
-      "x": 1184,
-      "y": 1195,
-      "global": false,
-      "iconSize": 40,
-      "texture": {
-        "tint": null,
-        "src": "icons/svg/book.svg",
-        "scaleX": 1,
-        "scaleY": 1,
-        "offsetX": 0,
-        "offsetY": 0,
-        "rotation": 0
-      },
-      "fontFamily": "Signika",
-      "fontSize": 32,
-      "textColor": "#FFFFFF",
-      "textAnchor": 1,
-      "_id": "TpVvYE81e8IXxbHX",
-      "flags": {
-              "helyx" : { "idname": "pf1en_cote_k4" }
-      }
-    },
-    {
-
-      "entryId": "R0b1SHkjMWbiRsDN",
-      "pageId": "KwjjPlge66nlECyP",
-      "text": "5",
-      "x": 1385,
-      "y": 917,
-      "global": false,
-      "iconSize": 40,
-      "texture": {
-        "tint": null,
-        "src": "icons/svg/book.svg",
-        "scaleX": 1,
-        "scaleY": 1,
-        "offsetX": 0,
-        "offsetY": 0,
-        "rotation": 0
-      },
-      "fontFamily": "Signika",
-      "fontSize": 32,
-      "textColor": "#FFFFFF",
-      "textAnchor": 1,
-      "_id": "Q26XAb4j5EeoB71u",
-      "flags": {
-              "helyx" : { "idname": "pf1en_cote_k5" }
-      }
-    },
-    {
-
-      "entryId": "R0b1SHkjMWbiRsDN",
-      "pageId": "iL9bwhfReqTGpwbK",
-      "text": "6",
-      "x": 1020,
-      "y": 1091,
-      "global": false,
-      "iconSize": 40,
-      "texture": {
-        "tint": null,
-        "src": "icons/svg/book.svg",
-        "scaleX": 1,
-        "scaleY": 1,
-        "offsetX": 0,
-        "offsetY": 0,
-        "rotation": 0
-      },
-      "fontFamily": "Signika",
-      "fontSize": 32,
-      "textColor": "#FFFFFF",
-      "textAnchor": 1,
-      "_id": "evO2gCF8bPApGe68",
-      "flags": {
-              "helyx" : { "idname": "pf1en_cote_k6" }
-      }
-    },
-    {
-
-      "entryId": "R0b1SHkjMWbiRsDN",
-      "pageId": "lcvJeA22xMqEkYne",
-      "text": "7",
-      "x": 586,
-      "y": 993,
-      "global": false,
-      "iconSize": 40,
-      "texture": {
-        "tint": null,
-        "src": "icons/svg/book.svg",
-        "scaleX": 1,
-        "scaleY": 1,
-        "offsetX": 0,
-        "offsetY": 0,
-        "rotation": 0
-      },
-      "fontFamily": "Signika",
-      "fontSize": 32,
-      "textColor": "#FFFFFF",
-      "textAnchor": 1,
-      "_id": "qxZ5A9b4YCISJVZm",
-      "flags": {
-              "helyx" : { "idname": "pf1en_cote_k7" }
-      }
-    },
-    {
-
-      "entryId": "R0b1SHkjMWbiRsDN",
-      "pageId": "bhHMbicFauI6ZZ6X",
-      "text": "8",
-      "x": 935,
-      "y": 1243,
-      "global": false,
-      "iconSize": 40,
-      "texture": {
-        "tint": null,
-        "src": "icons/svg/book.svg",
-        "scaleX": 1,
-        "scaleY": 1,
-        "offsetX": 0,
-        "offsetY": 0,
-        "rotation": 0
-      },
-      "fontFamily": "Signika",
-      "fontSize": 32,
-      "textColor": "#FFFFFF",
-      "textAnchor": 1,
-      "_id": "nefbUSNro5tPE4Wq",
-      "flags": {
-              "helyx" : { "idname": "pf1en_cote_k8" }
-      }
-    },
-    {
-
-      "entryId": "R0b1SHkjMWbiRsDN",
-      "pageId": "McnbSSQSxQZ2eXeI",
-      "text": "9",
-      "x": 1168,
-      "y": 1403,
-      "global": false,
-      "iconSize": 40,
-      "texture": {
-        "tint": null,
-        "src": "icons/svg/book.svg",
-        "scaleX": 1,
-        "scaleY": 1,
-        "offsetX": 0,
-        "offsetY": 0,
-        "rotation": 0
-      },
-      "fontFamily": "Signika",
-      "fontSize": 32,
-      "textColor": "#FFFFFF",
-      "textAnchor": 1,
-      "_id": "vAUEVYHPerTWbQjs",
-      "flags": {
-              "helyx" : { "idname": "pf1en_cote_k9" }
-      }
-    },
-    {
-
-      "entryId": "R0b1SHkjMWbiRsDN",
-      "pageId": "57ico41LOi9xRpOb",
-      "text": "10",
-      "x": 1674,
-      "y": 1201,
-      "global": false,
-      "iconSize": 40,
-      "texture": {
-        "tint": null,
-        "src": "icons/svg/book.svg",
-        "scaleX": 1,
-        "scaleY": 1,
-        "offsetX": 0,
-        "offsetY": 0,
-        "rotation": 0
-      },
-      "fontFamily": "Signika",
-      "fontSize": 32,
-      "textColor": "#FFFFFF",
-      "textAnchor": 1,
-      "_id": "Rz2Pe7aeGpt1XMIy",
-      "flags": {
-              "helyx" : { "idname": "pf1en_cote_k10" }
-      }
-    },
-    {
-
-      "entryId": "R0b1SHkjMWbiRsDN",
-      "pageId": "cRehcjYdeCrkJjXS",
-      "text": "11",
-      "x": 2011,
-      "y": 1157,
-      "global": false,
-      "iconSize": 40,
-      "texture": {
-        "tint": null,
-        "src": "icons/svg/book.svg",
-        "scaleX": 1,
-        "scaleY": 1,
-        "offsetX": 0,
-        "offsetY": 0,
-        "rotation": 0
-      },
-      "fontFamily": "Signika",
-      "fontSize": 32,
-      "textColor": "#FFFFFF",
-      "textAnchor": 1,
-      "_id": "O2cvoNzehDrazcAI",
-      "flags": {
-              "helyx" : { "idname": "pf1en_cote_k11" }
-      }
-    },
-    {
-
-      "entryId": "R0b1SHkjMWbiRsDN",
-      "pageId": "afAR3BTYKNIWDLDi",
-      "text": "12",
-      "x": 1861,
-      "y": 561,
-      "global": false,
-      "iconSize": 40,
-      "texture": {
-        "tint": null,
-        "src": "icons/svg/book.svg",
-        "scaleX": 1,
-        "scaleY": 1,
-        "offsetX": 0,
-        "offsetY": 0,
-        "rotation": 0
-      },
-      "fontFamily": "Signika",
-      "fontSize": 32,
-      "textColor": "#FFFFFF",
-      "textAnchor": 1,
-      "_id": "y6SsOolQK9680u4E",
-      "flags": {
-              "helyx" : { "idname": "pf1en_cote_k12" }
-      }
-    },
-    {
-
-      "entryId": "R0b1SHkjMWbiRsDN",
-      "pageId": "fkpMs4PNgV5hgO6T",
-      "text": "13",
-      "x": 1004,
-      "y": 243,
-      "global": false,
-      "iconSize": 40,
-      "texture": {
-        "tint": null,
-        "src": "icons/svg/book.svg",
-        "scaleX": 1,
-        "scaleY": 1,
-        "offsetX": 0,
-        "offsetY": 0,
-        "rotation": 0
-      },
-      "fontFamily": "Signika",
-      "fontSize": 32,
-      "textColor": "#FFFFFF",
-      "textAnchor": 1,
-      "_id": "8KAM5obgkajbOY8t",
-      "flags": {
-              "helyx" : { "idname": "pf1en_cote_k13" }
-      }
-    }
-  ],
+  "notes": [],
   "sounds": [],
-  "templates": [],
   "tiles": [],
   "walls": [],
   "playlist": null,
@@ -410,19 +38,122 @@
     "core": {
       "sourceId": "Scene.qEbp7wWLYi9edIwY"
     },
-    "exportSource": {
-      "world": "pf1",
-      "system": "pf1",
-      "coreVersion": "10.291",
-      "systemVersion": "0.82.5"
+    "helyx-maker-3": {
+      "config": {
+        "idname": "pf1en_cote_town",
+        "version": "7.87",
+        "source": "crypt-of-the-everflame"
+      }
     }
   },
   "_stats": {
     "systemId": "pf1",
-    "systemVersion": "0.82.5",
-    "coreVersion": "10.291",
-    "createdTime": 1676997487874,
-    "modifiedTime": 1676997876119,
-    "lastModifiedBy": "Olxp8svnAX9ojHl1"
+    "systemVersion": "11.11",
+    "coreVersion": "14.365",
+    "createdTime": 1788707230089,
+    "modifiedTime": 1788707293644,
+    "lastModifiedBy": "6xp89CeWbOx2eo78",
+    "exportSource": {
+      "worldId": "pf1-dev",
+      "uuid": "Scene.B16wc07Z7Fc0sfTu",
+      "coreVersion": "14.365",
+      "systemId": "pf1",
+      "systemVersion": "11.11"
+    },
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": "DFxdrR15E66bxjIc",
+  "shiftX": 0,
+  "shiftY": 0,
+  "initialLevel": "defaultLevel0000",
+  "fog": {
+    "mode": 1,
+    "colors": {
+      "explored": null,
+      "unexplored": null
+    }
+  },
+  "environment": {
+    "darknessLevel": 0,
+    "darknessLock": false,
+    "globalLight": {
+      "enabled": false,
+      "alpha": 0.5,
+      "bright": false,
+      "color": null,
+      "coloration": 1,
+      "luminosity": 0,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "cycle": true,
+    "base": {
+      "hue": 0,
+      "intensity": 0,
+      "luminosity": 0,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "dark": {
+      "hue": 0.7138888888888889,
+      "intensity": 0,
+      "luminosity": -0.25,
+      "saturation": 0,
+      "shadows": 0
+    }
+  },
+  "transition": {
+    "type": null,
+    "duration": 1500,
+    "activeOnly": false
+  },
+  "levels": [
+    {
+      "_id": "defaultLevel0000",
+      "name": "Level",
+      "elevation": {
+        "bottom": 0,
+        "top": 20
+      },
+      "background": {
+        "color": "#999999",
+        "src": "helyx/crypt-of-the-everflame/scenes/town.webp",
+        "tint": "#ffffff",
+        "alphaThreshold": 0.75
+      },
+      "foreground": {
+        "src": null,
+        "tint": "#ffffff",
+        "alphaThreshold": 0.75
+      },
+      "fog": {
+        "src": null
+      },
+      "textures": {
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "offsetX": 0,
+        "offsetY": 0,
+        "fit": "fill",
+        "scaleX": 1,
+        "scaleY": 1,
+        "rotation": 0
+      },
+      "visibility": {
+        "levels": []
+      },
+      "sort": 0,
+      "flags": {}
+    }
+  ],
+  "regions": [],
+  "ownership": {
+    "default": 0
   }
 }
